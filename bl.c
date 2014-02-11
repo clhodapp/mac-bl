@@ -15,6 +15,18 @@ static FILE * fopen_or_fail(const char * path, const char * mode) {
 }
 
 int main(int argc, char** argv) {
+	
+	char * called_as;
+	{
+		char * tmp = strtok(argv[0], "/");
+		char * last = tmp;
+		while (tmp != NULL) {
+			last = tmp;
+			tmp = strtok(NULL, "/");
+		}
+		called_as = last;
+
+	}
 
 	char actual_str[25];
 	char max_str[25];
@@ -36,11 +48,11 @@ int main(int argc, char** argv) {
 	for (int i = 0; i < num_settings; i++)
 		settings[i] = i * max / (num_settings - 1);
 	
-	if (!strcmp(argv[0], "bl")) {
+	if (!strcmp(called_as, "bl")) {
 		printf("current brightness is %li\n", actual);
 	} else {
 		long long new_brightness;
-		if (!strcmp(argv[0], "bm")) {
+		if (!strcmp(called_as, "bm")) {
 			int idx = 7;
 			while (settings[idx] >= actual && idx > 0) idx--;
 			new_brightness = settings[idx];
