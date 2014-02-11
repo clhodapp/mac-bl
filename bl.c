@@ -20,10 +20,12 @@ int main(int argc, char** argv) {
 	{
 		char * tmp = strtok(argv[0], "/");
 		char * last = tmp;
+
 		while (tmp != NULL) {
 			last = tmp;
 			tmp = strtok(NULL, "/");
 		}
+
 		called_as = last;
 
 	}
@@ -42,7 +44,6 @@ int main(int argc, char** argv) {
 	fclose(current_file);
 
 	strtok(actual_str, "\n");
-
 	
 	if (strcmp(called_as, "bl")) {
 
@@ -55,6 +56,7 @@ int main(int argc, char** argv) {
 			settings[i] = i * max / (num_settings - 1);
 
 		long long new_brightness;
+
 		if (!strcmp(called_as, "bm")) {
 			int idx = 7;
 			while (settings[idx] >= actual && idx > 0) idx--;
@@ -73,6 +75,7 @@ int main(int argc, char** argv) {
 		fprintf(update_file, "%lli\n", new_brightness);
 
 		fclose(update_file);
+
 	} else {
 		printf("current brightness is %s of %s\n", actual_str, max_str);
 	}
