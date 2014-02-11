@@ -1,0 +1,14 @@
+
+Simple tool for manipulating MacBook backlight brightness under Linux
+
+Installing (installs to /usr/local/bin):
+  cmake .
+  make
+  sudo make install
+
+
+Commands:
+  * bl (backlight level): get the current backlight brightness
+  * bm (backlight minus): reduce the backlight brightness
+  * bp (backlight plus): increase the backlight brightness
+
