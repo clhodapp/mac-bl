@@ -48,9 +48,7 @@ int main(int argc, char** argv) {
 	for (int i = 0; i < num_settings; i++)
 		settings[i] = i * max / (num_settings - 1);
 	
-	if (!strcmp(called_as, "bl")) {
-		printf("current brightness is %li\n", actual);
-	} else {
+	if (strcmp(called_as, "bl")) {
 		long long new_brightness;
 		if (!strcmp(called_as, "bm")) {
 			int idx = 7;
@@ -68,6 +66,8 @@ int main(int argc, char** argv) {
 		fprintf(update_file, "%lli\n", new_brightness);
 
 		fclose(update_file);
+	} else {
+		printf("current brightness is %li\n", actual);
 	}
 
 	return 0;
