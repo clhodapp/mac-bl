@@ -35,20 +35,25 @@ int main(int argc, char** argv) {
 	fgets(max_str, sizeof(max_str), max_file);
 	fclose(max_file);
 
-	long int max = atol(max_str);
+	strtok(max_str, "\n");
 
 	FILE* current_file = fopen_or_fail("/sys/class/backlight/gmux_backlight/brightness", "r");
 	fgets(actual_str, sizeof(actual_str), current_file);
 	fclose(current_file);
 
-	long int actual = atol(actual_str);
+	strtok(actual_str, "\n");
 
-	long long int * settings = malloc(num_settings * sizeof(long long int));
-
-	for (int i = 0; i < num_settings; i++)
-		settings[i] = i * max / (num_settings - 1);
 	
 	if (strcmp(called_as, "bl")) {
+
+		long int max = atol(max_str);
+		long int actual = atol(actual_str);
+
+		long long int * settings = malloc(num_settings * sizeof(long long int));
+
+		for (int i = 0; i < num_settings; i++)
+			settings[i] = i * max / (num_settings - 1);
+
 		long long new_brightness;
 		if (!strcmp(called_as, "bm")) {
 			int idx = 7;
@@ -67,7 +72,7 @@ int main(int argc, char** argv) {
 
 		fclose(update_file);
 	} else {
-		printf("current brightness is %li\n", actual);
+		printf("current brightness is %s of %s\n", actual_str, max_str);
 	}
 
 	return 0;
