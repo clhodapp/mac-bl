@@ -65,6 +65,8 @@ int main(int argc, char** argv) {
 			new_brightness = settings[idx];
 		}
 
+		free(settings);
+
 		printf("changing %li to %lli\n", actual, new_brightness);
 
 		FILE * update_file = fopen_or_fail("/sys/class/backlight/gmux_backlight/brightness", "w");
