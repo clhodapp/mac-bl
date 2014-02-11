@@ -34,13 +34,13 @@ int main(int argc, char** argv) {
 	char max_str[25];
 
 	FILE* max_file = fopen_or_fail("/sys/class/backlight/gmux_backlight/max_brightness", "r");
-	fgets(max_str, sizeof(max_str), max_file);
+	fgets(max_str, sizeof(max_str)/sizeof(char), max_file);
 	fclose(max_file);
 
 	strtok(max_str, "\n");
 
 	FILE* current_file = fopen_or_fail("/sys/class/backlight/gmux_backlight/brightness", "r");
-	fgets(actual_str, sizeof(actual_str), current_file);
+	fgets(actual_str, sizeof(actual_str)/sizeof(char), current_file);
 	fclose(current_file);
 
 	strtok(actual_str, "\n");
